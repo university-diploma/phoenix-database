@@ -1,0 +1,2 @@
+CREATE USER 'dev'@'%' IDENTIFIED BY 's3cure';
+GRANT ALL PRIVILEGES ON * . * TO 'dev'@'%';
