@@ -4,20 +4,23 @@ IMAGE_NAME := 'phoenix-database'
 CONTAINER_NAME := 'phoenix-db'
 USERNAME := 'bsgfb'
 
+DOCKER_BUILD := ${DOCKER} build -t ${IMAGE_NAME} .
+DOCKER_RUN := ${DOCKER} run -it --rm --name ${CONTAINER_NAME} -p 3306:3306 -d ${IMAGE_NAME}
+
 build:
-	${DOCKER} build -t ${IMAGE_NAME} .
-	
+	${DOCKER_BUILD}
+
 run:
-	${DOCKER} run -it --rm --name ${CONTAINER_NAME} ${IMAGE_NAME}
+	${DOCKER_RUN}
 
 full:
-	${DOCKER} build -t ${IMAGE_NAME} .
-	${DOCKER} run -it --rm --name ${CONTAINER_NAME} ${IMAGE_NAME}
+	${DOCKER_BUILD}
+	${DOCKER_RUN}
 
 stop:
-	${DOCKER} build ${CONTAINER_NAME}
-	
+	${DOCKER} stop ${CONTAINER_NAME}
+
 push:
-	${DOCKER} build -t ${IMAGE_NAME} .
+	${DOCKER_BUILD}
 	${DOCKER} tag ${IMAGE_NAME} ${USERNAME}/${IMAGE_NAME}
 	${DOCKER} push ${USERNAME}/${IMAGE_NAME}
