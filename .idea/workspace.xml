@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="10bf4fb3-1b2a-4ffa-b03d-bdec102f7f82" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/init/database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/init/database.sql" afterDir="false" />
-    </list>
+    <list default="true" id="10bf4fb3-1b2a-4ffa-b03d-bdec102f7f82" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +14,8 @@
       <file leaf-file-name="database.sql" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/init/database.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="293">
-              <caret line="304" column="41" selection-start-line="304" selection-start-column="41" selection-end-line="304" selection-end-column="41" />
+            <state relative-caret-position="421">
+              <caret line="308" column="6" lean-forward="true" selection-start-line="308" selection-start-column="6" selection-end-line="308" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -27,7 +24,7 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>ENUM ('M', 'F')</find>
+      <find />
       <find>product</find>
     </findStrings>
   </component>
@@ -57,11 +54,11 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="2880" />
-    <option name="y" value="28" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="523" />
+    <option name="y" value="-264" />
     <option name="width" value="960" />
-    <option name="height" value="1052" />
+    <option name="height" value="976" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -165,16 +162,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1529229780249</updated>
-      <workItem from="1529229782436" duration="689000" />
+      <workItem from="1529229782436" duration="1028000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="689000" />
+    <option name="totallyTimeSpent" value="1028000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2880" y="28" width="960" height="1052" extended-state="0" />
-    <editor active="true" />
+    <frame x="-1" y="3" width="1922" height="1078" extended-state="6" />
     <layout>
       <window_info anchor="right" id="Palette" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -186,10 +182,10 @@
       <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.32897604" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.32838982" />
       <window_info id="Capture Tool" />
       <window_info id="Designer" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2912088" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14155982" />
       <window_info anchor="bottom" id="Docker" />
       <window_info anchor="right" id="Database" />
       <window_info anchor="right" id="SciView" />
@@ -216,8 +212,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/init/database.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="304" column="41" selection-start-line="304" selection-start-column="41" selection-end-line="304" selection-end-column="41" />
+        <state relative-caret-position="421">
+          <caret line="308" column="6" lean-forward="true" selection-start-line="308" selection-start-column="6" selection-end-line="308" selection-end-column="6" />
         </state>
       </provider>
     </entry>

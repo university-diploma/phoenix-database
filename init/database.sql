@@ -82,7 +82,7 @@ CREATE TABLE category (
 CREATE TABLE product (
   product_id  INT           NOT NULL AUTO_INCREMENT,
   title       VARCHAR(300)  NOT NULL,
-  desciption  VARCHAR(1000) NOT NULL,
+  description  VARCHAR(1000) NOT NULL,
   type        ENUM ('S', 'B'),
   rubles      INT           NOT NULL,
   pennies     INT           NOT NULL,
@@ -300,7 +300,7 @@ VALUES
   ('375332023292', getUserIdByEmail('bloshuk74@gmail.com'));
 
 
-INSERT INTO product (title, desciption, type, rubles, pennies, category_id, city_id, user_id)
+INSERT INTO product (title, description, type, rubles, pennies, category_id, city_id, user_id)
 VALUES
   ('test name', 'test description', 'S', 10, 60, getCategoryIdByName('Smartphone'), getCityIdByName('Brest'),
    getUserIdByEmail('bloshuk74@gmail.com'));
