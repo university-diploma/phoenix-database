@@ -81,13 +81,15 @@ CREATE TABLE category (
 
 CREATE TABLE product (
   product_id  INT           NOT NULL AUTO_INCREMENT,
-  name        VARCHAR(300)  NOT NULL,
+  title       VARCHAR(300)  NOT NULL,
   desciption  VARCHAR(1000) NOT NULL,
+  type        ENUM ('S', 'B'),
   rubles      INT           NOT NULL,
   pennies     INT           NOT NULL,
   category_id INT           NOT NULL,
   city_id     INT           NOT NULL,
   user_id     INT           NOT NULL,
+  last_update TIMESTAMP     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
   PRIMARY KEY (product_id),
   FOREIGN KEY (category_id) REFERENCES category (category_id),
@@ -106,6 +108,7 @@ CREATE TABLE photo (
 
 -- FUNCTIONS
 DELIMITER $$
+DROP FUNCTION IF EXISTS getRegionIdByName;
 CREATE FUNCTION getRegionIdByName(region_name VARCHAR(200))
   RETURNS INT DETERMINISTIC
   BEGIN
@@ -118,6 +121,7 @@ CREATE FUNCTION getRegionIdByName(region_name VARCHAR(200))
   END
 $$
 
+DROP FUNCTION IF EXISTS getRoleIdByName;
 CREATE FUNCTION getRoleIdByName(role_name VARCHAR(200))
   RETURNS INT DETERMINISTIC
   BEGIN
@@ -130,6 +134,7 @@ CREATE FUNCTION getRoleIdByName(role_name VARCHAR(200))
   END
 $$
 
+DROP FUNCTION IF EXISTS getUserIdByEmail;
 CREATE FUNCTION getUserIdByEmail(email VARCHAR(200))
   RETURNS INT DETERMINISTIC
   BEGIN
@@ -142,6 +147,7 @@ CREATE FUNCTION getUserIdByEmail(email VARCHAR(200))
   END
 $$
 
+DROP FUNCTION IF EXISTS getCommonCategoryIdByName;
 CREATE FUNCTION getCommonCategoryIdByName(category_name VARCHAR(200))
   RETURNS INT DETERMINISTIC
   BEGIN
@@ -154,6 +160,7 @@ CREATE FUNCTION getCommonCategoryIdByName(category_name VARCHAR(200))
   END
 $$
 
+DROP FUNCTION IF EXISTS getCityIdByName;
 CREATE FUNCTION getCityIdByName(city_name VARCHAR(200))
   RETURNS INT DETERMINISTIC
   BEGIN
@@ -166,6 +173,7 @@ CREATE FUNCTION getCityIdByName(city_name VARCHAR(200))
   END
 $$
 
+DROP FUNCTION IF EXISTS getCategoryIdByName;
 CREATE FUNCTION getCategoryIdByName(name VARCHAR(200))
   RETURNS INT DETERMINISTIC
   BEGIN
@@ -177,6 +185,74 @@ CREATE FUNCTION getCategoryIdByName(name VARCHAR(200))
     RETURN phoneId;
   END
 $$
+
+DROP FUNCTION IF EXISTS createCommonCategories;
+CREATE FUNCTION createCommonCategories(commonCategoryName VARCHAR(200))
+  RETURNS INT DETERMINISTIC
+  BEGIN
+    INSERT INTO common_category (name) VALUES (commonCategoryName);
+    RETURN getCommonCategoryIdByName(commonCategoryName);
+  END
+$$
+
+DROP PROCEDURE IF EXISTS createCategories;
+CREATE PROCEDURE createCategories()
+  BEGIN
+    DECLARE electronicDevicesId INT DEFAULT createCommonCategories('Electronic devices');
+    DECLARE kitchenElectronicDevicesId INT DEFAULT createCommonCategories('Kitchen electronic devices');
+    DECLARE personalItemsId INT DEFAULT createCommonCategories('Personal items');
+    DECLARE kitchenId INT DEFAULT createCommonCategories('Kitchen');
+    DECLARE decorId INT DEFAULT createCommonCategories('Decor');
+    DECLARE gardenId INT DEFAULT createCommonCategories('Garden');
+
+    # Electronic devices
+    INSERT INTO category (name, common_category_id)
+    VALUES
+      ('Computer', electronicDevicesId),
+      ('Keyboard', electronicDevicesId),
+      ('Printer', electronicDevicesId),
+      ('Fax', electronicDevicesId),
+      ('Laptop', electronicDevicesId),
+      ('Smartphone', electronicDevicesId),
+      ('Washing machine', electronicDevicesId),
+      ('Sewing machine', electronicDevicesId);
+
+    # Kitchen electronic devices
+    INSERT INTO category (name, common_category_id)
+    VALUES
+      ('Coffeemaker', kitchenElectronicDevicesId),
+      ('Toaster', kitchenElectronicDevicesId),
+      ('Refrigerator', kitchenElectronicDevicesId);
+
+    # Personal items
+    INSERT INTO category (name, common_category_id)
+    VALUES
+      ('Wallet', personalItemsId),
+      ('Bag', personalItemsId),
+      ('Sunglasses', personalItemsId),
+      ('Umbrella', personalItemsId),
+      ('Pen', personalItemsId);
+
+    # Kitchen
+    INSERT INTO category (name, common_category_id)
+    VALUES
+      ('cup', kitchenId),
+      ('kettle', kitchenId);
+
+    # Decor
+    INSERT INTO category (name, common_category_id)
+    VALUES
+      ('Wall clock', decorId);
+
+    # Garden
+    INSERT INTO category (name, common_category_id)
+    VALUES
+      ('Lantern', gardenId);
+  END
+$$
+
+
+
 DELIMITER ;
 -- POPULATE VALUES
 
@@ -216,13 +292,7 @@ VALUES
   (getUserIdByEmail('bloshuk74@gmail.com'), getRoleIdByName('USER'));
 
 
-INSERT INTO common_category (name) VALUES ('Electronic devices');
-INSERT INTO category (name, common_category_id)
-VALUES
-  ('Computer', getCommonCategoryIdByName('Electronic devices')),
-  ('Keyboard', getCommonCategoryIdByName('Electronic devices')),
-  ('Printer', getCommonCategoryIdByName('Electronic devices')),
-  ('Smartphone', getCommonCategoryIdByName('Electronic devices'));
+CALL createCategories();
 
 INSERT INTO phone (phone_number, user_id)
 VALUES
@@ -230,9 +300,9 @@ VALUES
   ('375332023292', getUserIdByEmail('bloshuk74@gmail.com'));
 
 
-INSERT INTO product (name, desciption, rubles, pennies, category_id, city_id, user_id)
+INSERT INTO product (title, desciption, type, rubles, pennies, category_id, city_id, user_id)
 VALUES
-  ('test name', 'test description', 10, 60, getCategoryIdByName('Smartphone'), getCityIdByName('Brest'),
+  ('test name', 'test description', 'S', 10, 60, getCategoryIdByName('Smartphone'), getCityIdByName('Brest'),
    getUserIdByEmail('bloshuk74@gmail.com'));
 
 INSERT INTO photo (photo, product_id)
